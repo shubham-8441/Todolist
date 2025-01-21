@@ -1,13 +1,19 @@
 // import logo from './logo.svg';
 import './App.css';
-import Header from  './mycomponents/Header';
+import {Header} from  './mycomponents/Header';
 import {CreateTodo} from  './mycomponents/CreateTodo';
 import {Todos}  from './mycomponents/Todos';
 import {Footer}  from './mycomponents/Footer.js';
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route, Routes,
+  Link
+} from "react-router-dom";
+import { About } from './mycomponents/About.js';
 
-
-function App() {
+ export default function App() {
 
   // State for todos
 const [todos, setTodos] = useState([
@@ -47,7 +53,7 @@ const [todos, setTodos] = useState([
 
 
 
-  // Function to delete a todo
+// Function to delete a todo
   const onDelete = (todo) => {
     console.log("I am Deleting this  todo  : ", todo);
 
@@ -59,8 +65,65 @@ const [todos, setTodos] = useState([
   };
 
 
-  //setTodos(todos.filter((t) => t.sno == todo.sno));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
+    <Router>
+      <div className='app'>
+      <Header  title = "My Todos list" searchbar = {false}/>
+        
+
+      <Routes>
+          <Route path="/about" element={<About/>} >
+          
+          </Route>
+          
+          <Route path="/" element={
+            // <>
+            <React.Fragment>
+            <Todos  key={sno} todos = {todos} onDelete ={onDelete}  />
+            <CreateTodo   addTodo = {addTodo}/>
+            </React.Fragment>
+            
+            // </>
+          }>
+            
+          </Route>
+        </Routes>
+        <Footer/>
+      </div>
+    </Router>
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //setTodos(todos.filter((t) => t.sno == todo.sno));
+  /* return (
 
   
   
@@ -70,7 +133,7 @@ const [todos, setTodos] = useState([
 <CreateTodo   addTodo = {addTodo}/>
 <Footer/>
     </div>
-  );
+  ); */
 }
 
-export default App;
+// export default App;
